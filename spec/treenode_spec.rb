@@ -2,22 +2,22 @@ require 'rspec'
 require 'treenode'
 
 describe Treenode do
+  subject { Treenode.new(1) }
 
   describe "#initialize" do
     it "sets the children up correctly" do
-      t = Treenode.new(1)
-      t.left.should == nil
-      t.right.should == nil
-      t.value == 1
+      subject.left.should == nil
+      subject.right.should == nil
+      subject.value == 1
     end
   end
 
   describe "#set_left" do
+
     it "should insert left child into tree" do
-      t = Treenode.new(9)
       l1 = Treenode.new(8)
       l2 = Treenode.new(7)
-      t.set_left(l1)
+      subject.set_left(l1)
       l1.set_left(l2)
       l1.left.should == l2
     end
@@ -25,7 +25,6 @@ describe Treenode do
 
   describe "#dfs" do
     it "should search the child nodes dfs" do
-      t = Treenode.new(0)
       l1 = Treenode.new(1)
       r1 = Treenode.new(3)
       t.left = l1
