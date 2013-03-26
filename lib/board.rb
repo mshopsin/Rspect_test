@@ -44,6 +44,12 @@ class Board
     @matrix[x][y] = piece
   end
 
+  def place_piece(position, color)
+    new_piece = Piece.new(color, position, self)
+    set_piece(position, new_piece)
+    new_piece
+  end
+
   def winner?  #returns the sym of the winner or draw if game is over, false if game is still in play
     count
     if @counter[nil] == 0

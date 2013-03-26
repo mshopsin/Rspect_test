@@ -26,14 +26,6 @@ describe Board do
     end
   end
 
-  describe "#place_piece" do
-    it "kills enemy and places tile" do
-      board = Board.new
-      board.place_piece([2, 4], :white)
-      board.get_piece([4, 3]).color.should == :white
-    end
-  end
-
   describe "#winner?" do
     it "detects when no player has won" do
       board = Board.new
@@ -70,15 +62,4 @@ describe Board do
     end
 
   end
-
-  # describe "#make_move" do
-#     subject { Board.new }
-#     let(:token) {double ("token",:color => :white)}
-#       it "places a token" do
-#         subject.make_move
-#       end
-#     end
-#   end
-
-
 end
