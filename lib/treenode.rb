@@ -1,11 +1,18 @@
 class Treenode
 
-  attr_accessor :left, :right, :value
+  attr_accessor :left, :right, :parent, :value
 
   def initialize(value)
     @left = nil
     @right = nil
+    @parent = nil
     @value = value
+  end
+
+  def set_left(node)
+    @left.parent = nil if @left
+    @left = node
+    node.parent = self
   end
 
   def dfs(value)

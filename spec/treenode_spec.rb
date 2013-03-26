@@ -12,6 +12,17 @@ describe Treenode do
     end
   end
 
+  describe "#set_left" do
+    it "should insert left child into tree" do
+      t = Treenode.new(9)
+      l1 = Treenode.new(8)
+      l2 = Treenode.new(7)
+      t.set_left(l1)
+      l1.set_left(l2)
+      l1.left.should == l2
+    end
+  end
+
   describe "#dfs" do
     it "should search the child nodes dfs" do
       t = Treenode.new(0)
