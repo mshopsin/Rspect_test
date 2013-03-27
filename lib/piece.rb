@@ -11,6 +11,10 @@ class Piece
     @color == :white ? "W" : "B"
   end
 
+  def dup(new_board)
+    Piece.new(@color, @location.dup, new_board)
+  end
+
   def places
     output_moves = []
     lx = location[0]
@@ -49,11 +53,11 @@ class Piece
       iy = index[1]
       next_pos = [lx + ix, ly + iy]
       #puts "#{index} index"
-      if next_is_enemy (next_pos)
+      if (@board.in_bounds?(next_pos) && next_is_enemy(next_pos))
           lesser_kill << next_pos.dup
           next_pos = [next_pos[0] + ix, next_pos[1] + iy]
           #puts "#{next_pos} next"
-          until !@board.in_bounds?(next_pos)
+          until !@board.in_bounds?(next_pos) || @board.get_piece(next_pos).nil?
             if found_my_team(next_pos)
               super_kill.push(*lesser_kill)
               break

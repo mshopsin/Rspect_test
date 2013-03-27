@@ -16,20 +16,15 @@ class Board
   end
 
   def render
-    output_array = []
-    @matrix.each do |row|
-      output_row = []
-      row.each do |cell|
+    @matrix.map do |row|
+      row.map do |cell|
         if cell.nil?
-          output_row << " "
+          " "
         else
-          output_row << cell.render
+          cell.render
         end
-      end
-      output_array << [output_row.join('')]
+      end.join
     end
-
-    output_array
   end
 
   def get_piece(position)
@@ -56,7 +51,7 @@ class Board
       if @counter[:white] == @counter[:black]
         return :draw
       end
-        return @counter[:white] > @counter[:black] ? :white : :black
+      return @counter[:white] > @counter[:black] ? :white : :black
     end
     if @counter[:white] == 0
       :black
@@ -86,4 +81,23 @@ class Board
     end
   end
 
+  def dup
+    new_board = Board.new
+    @matrix.each_with_index do |row, index|
+      output_row = []
+      row.each do |cell|
+        if cell.nil?
+          output_row << cell
+        else
+          output_row << cell.dup(new_board)
+        end
+      end
+      new_board.matrix[index] = output_row
+    end
+
+    new_board
+  end
 end
+
+b = Board.new
+p b.render
